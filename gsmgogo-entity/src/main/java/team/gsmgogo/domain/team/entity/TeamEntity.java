@@ -6,6 +6,7 @@ import team.gsmgogo.domain.normalteamparticipate.entity.NormalTeamParticipateEnt
 import team.gsmgogo.domain.team.enums.BadmintonRank;
 import team.gsmgogo.domain.team.enums.TeamType;
 import team.gsmgogo.domain.teamparticipate.entity.TeamParticipateEntity;
+import team.gsmgogo.domain.user.entity.UserEntity;
 import team.gsmgogo.domain.user.enums.ClassEnum;
 import team.gsmgogo.domain.user.enums.GradeEnum;
 
@@ -24,6 +25,10 @@ public class TeamEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_id")
     private Long teamId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity author;
 
     @Column(name = "team_name", length = 7)
     private String teamName;

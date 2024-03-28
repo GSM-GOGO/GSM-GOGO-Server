@@ -69,6 +69,7 @@ public class TeamBadmintonSaveServiceImpl implements TeamBadmintonSaveService {
 
         TeamEntity newTeam = TeamEntity.builder()
                 .teamName(request.getTeamName())
+                .author(currentUser)
                 .winCount(0)
                 .isSurvived(true)
                 .teamClass(currentUser.getUserClass())

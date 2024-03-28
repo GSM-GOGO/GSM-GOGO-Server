@@ -65,6 +65,7 @@ public class TeamSaveServiceImpl implements TeamSaveService {
         }).toList();
 
         TeamEntity newTeam = TeamEntity.builder()
+                .author(currentUser)
                 .teamName(request.getTeamName())
                 .winCount(0)
                 .isSurvived(true)

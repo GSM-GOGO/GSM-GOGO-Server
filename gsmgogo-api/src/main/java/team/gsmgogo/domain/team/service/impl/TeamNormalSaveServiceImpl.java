@@ -67,6 +67,7 @@ public class TeamNormalSaveServiceImpl implements TeamNormalSaveService {
 
 
         TeamEntity newTeam = TeamEntity.builder()
+                .author(currentUser)
                 .teamClass(currentUser.getUserClass())
                 .teamGrade(currentUser.getUserGrade())
                 .teamType(TeamType.NORMAL)
