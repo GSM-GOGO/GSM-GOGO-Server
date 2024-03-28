@@ -62,16 +62,22 @@ public class MessageSendServiceImpl implements MessageSendService {
 
     @Override
     public String test(String phoneNumber) {
-        Long id = userFacade.getCurrentUser().getUserId();
+        UserEntity user = userFacade.getCurrentUser();
+
+        if(user.getIsVerify() == IsVerify.Enabled) throw new ExpectedException("이미 인증된 전화번호가 존재합니다.", HttpStatus.BAD_REQUEST);
+
         String generatedCode = generateCode();
 
         VerifyCodeRedisEntity verifyCode = VerifyCodeRedisEntity.builder()
-                .userId(id)
+                .userId(user.getUserId())
                 .code(generatedCode)
                 .expiredAt(600000L)
                 .build();
 
+        user.setPhoneNumber(phoneNumber);
+
         verifyCodeJpaRepository.save(verifyCode);
+        userJpaRepository.save(user);
 
         return "GSM GOGO v2 [" + generatedCode + "]를 입력해주세요!";
     }
