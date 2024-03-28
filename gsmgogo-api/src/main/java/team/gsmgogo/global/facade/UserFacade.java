@@ -15,6 +15,9 @@ public class UserFacade {
 
     public UserEntity getCurrentUser() {
         String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        if(userId.equals("anonymousUser")) throw new ExpectedException("게스트의 유저 정보를 가져올 수 없습니다.", HttpStatus.FORBIDDEN);
+
         return getUserByEmail(userId);
     }
 
