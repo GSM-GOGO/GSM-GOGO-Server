@@ -15,4 +15,6 @@ public interface TeamJpaRepository extends JpaRepository<TeamEntity, Long> {
     Optional<TeamEntity> findByTeamId(Long teamId);
 
     List<TeamEntity> findByTeamType(TeamType teamType);
+
+    Optional<TeamEntity> findByTeamTypeAndTeamId(TeamType teamType, Long teamId);
 }

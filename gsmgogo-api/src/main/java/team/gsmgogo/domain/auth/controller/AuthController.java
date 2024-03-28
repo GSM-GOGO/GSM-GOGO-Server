@@ -11,10 +11,7 @@ import team.gsmgogo.domain.auth.controller.dto.response.AuthCallBackCodeResponse
 import team.gsmgogo.domain.auth.controller.dto.response.AuthLoginUrlResponse;
 import team.gsmgogo.domain.auth.controller.dto.response.ReissueTokenDto;
 import team.gsmgogo.domain.auth.controller.dto.response.TokenDto;
-import team.gsmgogo.domain.auth.service.CheckVerifyCodeService;
-import team.gsmgogo.domain.auth.service.GauthLoginService;
-import team.gsmgogo.domain.auth.service.MessageSendService;
-import team.gsmgogo.domain.auth.service.TokenReissueService;
+import team.gsmgogo.domain.auth.service.*;
 
 import java.io.IOException;
 
@@ -26,6 +23,7 @@ public class AuthController {
     private final CheckVerifyCodeService checkVerifyCodeService;
     private final GauthLoginService gauthLoginService;
     private final TokenReissueService tokenReissueService;
+    private final SkipVerifyService skipVerifyService;
 
     @Value("${gauth.clientId}")
     private String clientId;
@@ -76,6 +74,12 @@ public class AuthController {
     @PostMapping("/verify")
     public ResponseEntity<Void> checkVerifyCode(@RequestParam("code") String verifyCode){
         checkVerifyCodeService.execute(verifyCode);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/sms/skip")
+    public ResponseEntity<Void> skipVerify(){
+        skipVerifyService.execute();
         return ResponseEntity.ok().build();
     }
 }

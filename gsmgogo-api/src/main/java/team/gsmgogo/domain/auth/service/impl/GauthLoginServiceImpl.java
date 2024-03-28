@@ -69,7 +69,7 @@ public class GauthLoginServiceImpl implements GauthLoginService {
 
         if (currentUser == null) {
             UserEntity newUser = UserEntity.builder()
-                    .isVerify(IsVerify.Disabled)
+                    .isVerify(IsVerify.NONE)
                     .userName(name)
                     .userEmail(email)
                     .userGrade(
@@ -105,7 +105,10 @@ public class GauthLoginServiceImpl implements GauthLoginService {
             userId = userJpaRepository.save(newUser).getUserId();
 
             isSignedUp = false;
-        } else if (currentUser.getIsVerify() == IsVerify.Enabled) {
+        } else if (
+            currentUser.getIsVerify() == IsVerify.VERIFY ||
+            currentUser.getIsVerify() == IsVerify.SKIP
+        ) {
             userId = currentUser.getUserId();
         } else {
             isSignedUp = false;

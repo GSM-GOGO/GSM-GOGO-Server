@@ -60,7 +60,7 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "is_verify", nullable = false)
-    private IsVerify isVerify = IsVerify.Disabled;
+    private IsVerify isVerify = IsVerify.NONE;
 
 
     @Column(name = "verify_count")

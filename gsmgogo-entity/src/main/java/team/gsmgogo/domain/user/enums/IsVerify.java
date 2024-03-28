@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum IsVerify {
-    Enabled("활성화"),
-    Disabled("비활성화")
-    ;
+    VERIFY("VERIFY"),
+    NONE("NONE"),
+    SKIP("SKIP");
 
     private final String description;
 }

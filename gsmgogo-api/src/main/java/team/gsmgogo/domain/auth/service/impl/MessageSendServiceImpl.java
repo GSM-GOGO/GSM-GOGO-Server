@@ -35,8 +35,11 @@ public class MessageSendServiceImpl implements MessageSendService {
     public void execute(String phoneNumber) {
         UserEntity user = userFacade.getCurrentUser();
 
-        if(user.getIsVerify() == IsVerify.Enabled) throw new ExpectedException("이미 인증된 전화번호가 존재합니다.", HttpStatus.BAD_REQUEST);
-        if(user.getVerifyCount() >= 5) throw new ExpectedException("하루에 인증은 5번만 할 수 있습니다.", HttpStatus.NO_CONTENT);
+        if(user.getIsVerify() == IsVerify.VERIFY)
+            throw new ExpectedException("이미 인증된 전화번호가 존재합니다.", HttpStatus.BAD_REQUEST);
+
+        if(user.getVerifyCount() >= 5)
+            throw new ExpectedException("하루에 인증은 5번만 할 수 있습니다.", HttpStatus.NO_CONTENT);
 
         String generatedCode = generateCode();
 

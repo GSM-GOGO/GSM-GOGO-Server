@@ -33,7 +33,7 @@ public class CheckVerifyCodeServiceImpl implements CheckVerifyCodeService {
             throw new ExpectedException("인증 코드가 같지 않습니다.", HttpStatus.BAD_REQUEST);
         }
 
-        user.setVerify(IsVerify.Enabled);
+        user.setVerify(IsVerify.VERIFY);
         userJpaRepository.save(user);
     }
 }
